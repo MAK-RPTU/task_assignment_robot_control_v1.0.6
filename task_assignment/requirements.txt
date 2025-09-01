@@ -1,0 +1,4 @@
+numpy # i guess you know what that is ;)
+pybullet # useful for 3d visualization of a robot via urdf
+pin # this is optional, if you want to do prototyping with the `pinocchio` rigid body library in python
+matplotlib # you might likely use that one for plotting
