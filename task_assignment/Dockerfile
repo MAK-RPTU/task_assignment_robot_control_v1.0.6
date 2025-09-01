@@ -23,5 +23,8 @@ RUN pip3 install --upgrade pip && pip3 install \
         pin \
         matplotlib 
 
+# Clone the Git repository into the working directory
+RUN git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git
+
 # Default command (can be changed as needed)
 CMD ["/bin/bash"]
