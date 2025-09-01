@@ -3,6 +3,7 @@ Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing
 
 ##
 
+NO need now:
 - Clone the repo:
 
     `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git`
