@@ -3,11 +3,6 @@ Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing
 
 ##
 
-NO need now:
-- Clone the repo:
-
-    `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git`
-
 - Go to the task_assignment directory:
 
     `cd task_assignment_robot_control_v1.0.6/task_assignment/`
@@ -40,3 +35,10 @@ NO need now:
 5. A basic visualization for robot
 
 `python3 ./src/basic_visualize.py`
+
+
+## Reference:
+
+- Git repository:
+
+    `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git`
