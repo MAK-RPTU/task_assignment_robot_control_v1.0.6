@@ -1,2 +1,25 @@
 # task_assignment_robot_control_v1.0.6
 Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing a PD controller to stabilize a UR5 robot in a Bullet Physics simulation. Includes a demonstration of external force disturbance rejection.
+
+
+1. After extracting the zip file go inside the folder task_assignment and run below command to mount the local directory to docker
+
+`docker run -it --rm -v $(pwd):/assignment meeran_assignment:latest`
+
+2. Inside the `assignment` directory in docker execute below commands step by step:
+
+`cmake -S . -B build`
+
+`cmake --build build`
+
+3. IN order to avoid dependencies conflict export the path while remaining in the `assignment` directory
+
+`export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"`
+
+4. Then run the robot_controller_assignment file using below command and it will give you joint positions
+
+`./build/src/robot_controller_assignment `
+
+5. A basic visualization for robot
+
+`python3 ./src/basic_visualize.py`
