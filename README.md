@@ -1,16 +1,32 @@
 # task_assignment_robot_control_v1.0.6
 Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing a PD controller to stabilize a UR5 robot in a Bullet Physics simulation. Includes a demonstration of external force disturbance rejection.
 
+##
 
-1. After extracting the zip file go inside the folder task_assignment and run below command to mount the local directory to docker
+- Clone the repo:
 
-`docker run -it --rm -v $(pwd):/assignment meeran_assignment:latest`
+    `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git`
+
+- Go to the task_assignment directory:
+
+    `cd task_assignment_robot_control_v1.0.6/task_assignment/`
+
+- Build the docker image:
+
+    `docker build -t meeran_assignment .`
+
+
+1. Execute below command to mount the local directory contents (folders and files) to docker assignment directory. Specify yout image and tag name
+
+    `docker run -it --rm -v $(pwd):/assignment <image_name>:<tag_name>`
+
+    e.g: `docker run -it --rm -v $(pwd):/assignment meeran_assignment:latest`
 
 2. Inside the `assignment` directory in docker execute below commands step by step:
 
-`cmake -S . -B build`
+    `cmake -S . -B build`
 
-`cmake --build build`
+    `cmake --build build`
 
 3. IN order to avoid dependencies conflict export the path while remaining in the `assignment` directory
 
