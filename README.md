@@ -14,9 +14,16 @@ Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing
 
 1. Execute below command to mount the local directory contents (folders and files) to docker assignment directory. Specify yout image and tag name
 
-    `docker run -it --rm -v $(pwd):/assignment <image_name>:<tag_name>`
+    `docker run -it --name assignment -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw meeran_assignment`
 
-    e.g: `docker run -it --rm -v $(pwd):/assignment meeran_assignment:latest`
+### Explanation:
+
+- --name assignment - assigns name to the container
+- -e DISPLAY=$DISPLAY passes your current display ID (:0 usually).
+
+- -v /tmp/.X11-unix:/tmp/.X11-unix → mounts the X11 socket so container apps can talk to your X server.
+
+- :rw makes sure it can read/write.
 
 2. Inside the `assignment` directory in docker execute below commands step by step:
 
