@@ -167,7 +167,7 @@ To add new functionality:
 
 - Add visualization logs - pass the new log file to basic_visualize.py
 
-References
+### References
 
 - GitHub Repo:
 
