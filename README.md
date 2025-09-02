@@ -1,6 +1,6 @@
 # task_assignment_robot_control_v1.0.6
 
-![CI](https://github.com/<username>/<repo>/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg)
 
 This project implements **robot control for a UR5 manipulator** in a Bullet Physics simulation.  
 It includes:
