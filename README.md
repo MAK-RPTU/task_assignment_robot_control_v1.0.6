@@ -1,4 +1,4 @@
-# Robot Control for UR5 Manipulator
+# task_assignment_robot_control_v1.0.6
 
 This project implements **robot control for a UR5 manipulator** in a Bullet Physics simulation.  
 It includes:
