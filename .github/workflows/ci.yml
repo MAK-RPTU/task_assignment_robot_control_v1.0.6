@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure, Build, and Test
       run: |
-        cd task_assignment_robot_control_v1.0.6/task_assignment
+        cd task_assignment
         cmake -S . -B build
         cmake --build build
         cd build
