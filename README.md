@@ -1,7 +1,7 @@
 # task_assignment_robot_control_v1.0.6
 Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing a PD controller to stabilize a UR5 robot in a Bullet Physics simulation. Includes a demonstration of external force disturbance rejection.
 
-##
+## Development Branch
 
 - Go to the task_assignment directory:
 
@@ -9,7 +9,12 @@ Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing
 
 - Build the docker image:
 
-    `docker build -t meeran_assignment .`
+    `docker build --no-cache -t meeran_assignment .`
+
+    --no-cache is used:
+
+        -Forces Docker to run every step fresh.
+        -Will clone the latest version of the git repo.
 
 
 1. Execute below command to mount the local directory contents (folders and files) to docker assignment directory. Specify yout image and tag name
