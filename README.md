@@ -1,5 +1,7 @@
 # task_assignment_robot_control_v1.0.6
 
+![CI](https://github.com/<username>/<repo>/actions/workflows/ci.yml/badge.svg)
+
 This project implements **robot control for a UR5 manipulator** in a Bullet Physics simulation.  
 It includes:
 
@@ -59,6 +61,10 @@ docker run -it --name assignment -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11
 - -v /tmp/.X11-unix:/tmp/.X11-unix : Mounts the X11 socket so container apps can talk to X server from bash terminal.
 
 - -v $(pwd):/assignment : Mounts your current repo
+
+```bash
+cd task_assignment/
+```
 
 ### 3. Building the Project
 
