@@ -24,10 +24,10 @@ RUN pip3 install --upgrade pip && pip3 install \
         matplotlib 
 
 # Clone the Git repository into the working directory
-RUN git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git
+#RUN git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git
 
 # Set the working directory to the specific folder inside the cloned repo
-WORKDIR /task_assignment_robot_control_v1.0.6/task_assignment
+#WORKDIR /task_assignment_robot_control_v1.0.6/task_assignment
 
 # Default command (can be changed as needed)
 CMD ["/bin/bash"]
