@@ -1,6 +1,7 @@
 add_executable(robot_controller_assignment
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/simulation.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/demo.cpp
 )
 
 set_target_properties(robot_controller_assignment PROPERTIES 
