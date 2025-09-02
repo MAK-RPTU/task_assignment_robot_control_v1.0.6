@@ -12,97 +12,169 @@ It includes:
 
 ---
 
-## 🎬 Quick Demo Showcase
+## Quick Demo Showcase
 
 | Demo Name           | Command to Run                         | Log File                 | Notes                             |
 |--------------------|----------------------------------------|--------------------------|----------------------------------|
 | Home Position       | `./robot_controller_assignment`        | `log_home.txt`           | Holds the robot at the home pose |
-| Trajectory Tracking | `./robot_controller_assignment`        | `log_trajectory.txt`     | Moves robot from start → end q   |
+| Trajectory Tracking | `./robot_controller_assignment`        | `log_trajectory.txt`     | Moves robot from start , end q   |
 | External Force      | `./robot_controller_assignment`        | `log_ext_force.txt`      | Applies external disturbance     |
 
+> After following steps mentioned in [1](#1-clone-the-repository) , [2](#2-build-with-docker) and [5](#5-visualization) use below python file to visualize  
 > Use the visualization script to play back any of the logs:  
-> `python3 basic_visualize --log <log_file.txt>`
+> e.g. `python3 basic_visualize --log <log_file.txt>`
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git -b develop
 ```
-
 ```bash
 cd task_assignment_robot_control_v1.0.6/task_assignment/
 ```
 
-##
+### 2. Build with Docker
 
-- Clone the repo:
-    `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git -b develop`
+Build the Docker image:
 
-- Go to the task_assignment directory:
+```bash
+docker build -t meeran_assignment .
+```
 
-    `cd task_assignment_robot_control_v1.0.6/task_assignment/`
+Run the container:
 
-- Build the docker image:
+```bash
+docker run -it --name assignment -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v $(pwd):/assignment meeran_assignment:latest
+```
 
-    `docker build -t meeran_assignment .`
+### Flags explained:
 
-1. Execute below command to mount the local directory contents (folders and files) to docker assignment directory. Specify your image and tag name
+- --name → Assigns a name to the container
 
-    e.g: `docker run -it --name assignment -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v $(pwd):/assignment meeran_assignment:latest`
+- -e DISPLAY=$DISPLAY : Shares your X display
 
-### Explanation:
+- -v /tmp/.X11-unix:/tmp/.X11-unix : Mounts the X11 socket so container apps can talk to X server from bash terminal.
 
-- --name - assigns name to the container
-- -e DISPLAY=$DISPLAY passes your current display ID (:0 usually).
+- -v $(pwd):/assignment : Mounts your current repo
 
-- -v /tmp/.X11-unix:/tmp/.X11-unix - mounts the X11 socket so container apps can talk to your X server from bash terminal.
+### 3. Building the Project
 
-- :rw makes sure it can read/write.
+```bash
+cmake -S . -B build
+```
 
-2. Inside the `assignment` directory in docker execute below commands step by step:
+```bash
+cmake --build build
+```
+Export library path to avoid dependency conflicts:
 
-    `cmake -S . -B build`
+```bash
+export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"
+```
+### 4. Running the Controller
 
-    `cmake --build build`
+Run the executable:
 
-3. IN order to avoid dependencies conflict export the path while remaining in the `assignment` directory
+```bash
+./robot_controller_assignment
+```
 
-`export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"`
+This generates log files such as:
 
-4. Then run the robot_controller_assignment file using below command and it will log joint positions in a txt file. Here is a symbolic link to the `./build/src/robot_controller_assignment ` for easier CLI.
+- log_home.txt - Home position demo
 
-`./robot_controller_assignment`
+- log_trajectory.txt - Trajectory demo
 
-5. A basic visualization for robot
+- log_ext_force.txt - External force demo
 
-    ### Method1 (simple)
-    If using vscode with running Dev container then simply run below commands to visualize:
+### 5. Visualization
+#### Method 1: Simple (Recommended)
 
-    `python3 basic_visualize` By default it will go to home position and retain there
+If using VSCode Dev Containers:
 
-    If we specify argument to our specific log file then it would visualize the respective demo e.g. Provided sample demo txt files name as log_ext_force.txt, log_home, log_trajectory.
+```bash
+python3 basic_visualize
+```
 
-    `python3 basic_visualize --log <log.txt>` 
+By default it runs home_demo.txt. To visualize a specific log file:
 
-    e.g:
+```bash
+python3 basic_visualize --log log_trajectory.txt
+```
+```bash
+python3 basic_visualize --log log_ext_force.txt
+```
 
-    `python3 basic_visualize --log log_ext_force.txt` 
+#### Method 2: Docker Root Session
 
-    ### Method2
-    If want to run via docker root terminal open a separate local terminal and allow the root user to access the running X server. The current X server is indicated by the DISPLAY environment variable.
+From a local terminal:
 
-    `xhost +local:root`
+```bash
+xhost +local:root
+```
 
-    and then run the below command inside docker bash shell and also can run the demos as stated above:
+Then inside the container:
 
-    `python3 basic_visualize`
+```bash
+python3 basic_visualize --log log_home.txt
+```
 
+### 6. Project Structure
 
-## Reference:
+```
+task_assignment/
+├── include/local/                  # Header files
+│   ├── controller.hpp              # Controllers (PID, PD+Gravity)
+│   ├── demo.hpp                    # Demo interfaces & implementations
+│   └── simulation.hpp              # Robot system & simulation
+├── src/                            # Source files
+│   ├── main.cpp                    # Entry point (choose controller + demo)
+│   └── demo.cpp                    # Demo implementations
+│   └── basic_visualize.py          # Python log visualization
+├── CMakeLists.txt      
+├── Dockerfile      
+├── basic_visualize                 # Symbolic link to Python log visualization
+└── robot_controller_assignment     # Symbolic link to run main.cpp
+```
+### 7. Features Summary
 
-- Git repository:
+- Controllers
 
-    `git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git -b develop`
+    - PD + Gravity Compensation
+
+    - PID
+
+- Demos
+
+    - Home position holding
+
+    - Trajectory tracking
+
+    - External force disturbance
+
+- Visualization with Python
+
+### 8. Extending the Project
+
+To add new functionality:
+
+- Create a new controller - extend control::Controller
+
+- Create a new demo - extend demo::Demo and implement run()
+
+- Add visualization logs - pass the new log file to basic_visualize.py
+
+References
+
+- GitHub Repo:
+
+    ```bash
+    git clone https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6.git -b develop
+    ```
+
+- Bullet Physics Engine
+
+- Pinocchio Robotics Library
