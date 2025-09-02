@@ -50,7 +50,19 @@ Task Assignment: Robot Control for a UR5 Manipulator A C++ project, implementing
 
 5. A basic visualization for robot
 
-`python3 ./src/basic_visualize.py`
+    ### Method1 (simple)
+    If using vscode with running Dev container then simply run below commands to visualize:
+
+    `python3 ./src/basic_visualize.py`
+
+    ### Method2
+    If want to run via docker root terminal open a separate local terminal and allow the root user to access the running X server. The current X server is indicated by the DISPLAY environment variable.
+
+    `xhost +local:root`
+
+    and then run the below command inside docker bash shell:
+
+    `python3 ./src/basic_visualize.py`
 
 
 ## Reference:
