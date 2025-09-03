@@ -68,10 +68,6 @@ docker run -it --name assignment -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11
 
 - -v $(pwd):/assignment : Mounts your current repo
 
-```bash
-cd task_assignment/
-```
-
 ### 3. Building the Project
 
 ```bash
