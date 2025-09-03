@@ -55,9 +55,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libtinyxml-dev \
+            build-essential \
+            cmake \
+            git \
+            python3 \
+            python3-pip \
             libeigen3-dev \
-            libconsole-bridge-dev
+            libtinyxml-dev
           sudo ldconfig
       
       - name: Download build and dependencies artifact
@@ -85,9 +89,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libtinyxml-dev \
+            build-essential \
+            cmake \
+            git \
+            python3 \
+            python3-pip \
             libeigen3-dev \
-            libconsole-bridge-dev
+            libtinyxml-dev
           sudo ldconfig
 
       - name: Download build and dependencies artifact
@@ -115,9 +123,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            libtinyxml-dev \
+            build-essential \
+            cmake \
+            git \
+            python3 \
+            python3-pip \
             libeigen3-dev \
-            libconsole-bridge-dev
+            libtinyxml-dev
           sudo ldconfig
 
       - name: Download build and dependencies artifact
