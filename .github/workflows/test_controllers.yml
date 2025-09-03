@@ -13,12 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: meeran_assignment
-
-      - name: Load Docker image
-        run: docker load < meeran_assignment.tar.gz
+      - name: Build Docker image
+        run: docker build -t meeran_assignment ./task_assignment
 
       - name: Run Controllers test
         run: |
@@ -33,3 +29,4 @@ jobs:
               cd build &&
               ctest -R test_controllers --verbose
             '
+
