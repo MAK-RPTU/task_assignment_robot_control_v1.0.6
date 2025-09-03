@@ -49,6 +49,10 @@ jobs:
           name: build
           path: task_assignment/build
 
+      - name: Fix test permissions
+        run: |
+          chmod +x task_assignment/build/tests/*
+          
       - name: Run Robot State Tests
         run: |
           cd task_assignment/build
