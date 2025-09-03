@@ -44,9 +44,9 @@ add_robot_test(test_robot_state test_robot_state.cpp
 #     ${CMAKE_SOURCE_DIR}/src/demo.cpp
 # )
 
-# add_robot_test(test_robot test_robot.cpp
-#     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
-#     ${CMAKE_SOURCE_DIR}/src/demo.cpp
-# )
+add_robot_test(test_robot test_robot.cpp
+    ${CMAKE_SOURCE_DIR}/src/simulation.cpp
+    ${CMAKE_SOURCE_DIR}/src/demo.cpp
+)
 
 # You can add more tests similarly
