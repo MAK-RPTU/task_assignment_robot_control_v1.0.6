@@ -47,6 +47,7 @@ jobs:
 
       - name: Run Robot State Tests
         run: |
+          export LD_LIBRARY_PATH=$(pwd)/lib:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_robot_state --verbose
 
@@ -68,6 +69,7 @@ jobs:
 
       - name: Run Controller Tests
         run: |
+          export LD_LIBRARY_PATH=$(pwd)/lib:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_controllers --verbose
 
@@ -86,8 +88,9 @@ jobs:
       - name: Fix test permissions
         run: |
           chmod +x task_assignment/build/tests/*
-          
+
       - name: Run Demo Tests
         run: |
+          export LD_LIBRARY_PATH=$(pwd)/lib:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_demos --verbose
