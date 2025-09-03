@@ -49,6 +49,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # This step is crucial for the test to find the library
+      - name: Install runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libtinyxml-dev
+          sudo ldconfig
       
       - name: Download build and dependencies artifact
         uses: actions/download-artifact@v4
@@ -70,6 +77,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+            # This step is crucial for the test to find the library
+      - name: Install runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libtinyxml-dev
+          sudo ldconfig
+
       - name: Download build and dependencies artifact
         uses: actions/download-artifact@v4
         with:
@@ -89,6 +103,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+            # This step is crucial for the test to find the library
+      - name: Install runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libtinyxml-dev
+          sudo ldconfig
 
       - name: Download build and dependencies artifact
         uses: actions/download-artifact@v4
