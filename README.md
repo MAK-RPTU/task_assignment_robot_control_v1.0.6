@@ -1,6 +1,17 @@
 # task_assignment_robot_control_v1.0.6
 
-![CI](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg)
+**Build Test**  
+![Build Docker](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=build-docker)
+
+**Robot State Test**  
+![Robot State Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_robot_state)
+
+**Controllers Test**  
+![Controllers Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_controllers)
+
+**Demos Test**  
+![Demos Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_demos)
+
 
 This project implements **robot control for a UR5 manipulator** in a Bullet Physics simulation.  
 It includes:
@@ -138,8 +149,17 @@ task_assignment/
 │   └── simulation.hpp              # Robot system & simulation
 ├── src/                            # Source files
 │   ├── main.cpp                    # Entry point (choose controller + demo)
-│   └── demo.cpp                    # Demo implementations
+│   ├── demo.cpp                    # Demo implementations
+│   ├── visualize3d.py              # visualization class for pybullet
+│   ├── simulation.cpp              
+│   ├── CMakeLists.txt              
 │   └── basic_visualize.py          # Python log visualization
+├── tests/                          # Tests
+│   ├── test_controllers.cpp        # Controller test
+│   ├── test_demos.cpp              # Demos test
+│   ├── test_robot_state.py         # Robot state joint angles and joint velocities
+│   ├── test_robot.cpp              # All tests combined (Sample)
+│   └── CMakeLists.txt              
 ├── CMakeLists.txt      
 ├── Dockerfile      
 ├── basic_visualize                 # Symbolic link to Python log visualization
@@ -163,7 +183,57 @@ task_assignment/
 
 - Visualization with Python
 
-### 8. Extending the Project
+### 9. Tests:
+
+All tests are located in the `tests/` directory:
+
+  -  `test_controllers.cpp` - Validates controller logic.
+
+  -  `test_demos.cpp` - Runs demonstration scenarios.
+
+  -  `test_robot_state.py` - Checks robot state (joint angles & velocities).
+
+  -  `test_robot.cpp` - Combined sample test covering multiple components.
+
+#### Running Tests
+
+##### Build the project in Debug mode (required for test symbols & assertions). Before build don't forget to be in `task_assignment/` directory:
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+```
+
+```bash
+cmake --build build
+```
+##### Go to the build directory:
+
+cd build/
+
+##### Run a specific test with CTest:
+
+```bash
+ctest -R <test_name> --verbose
+```
+
+##### Example:
+
+```bash
+ctest -R test_robot_state --verbose
+```
+
+##### Automated Tests (CI/CD)
+
+- Use GitHub Actions to run tests automatically on every push to the develop branch.
+
+- Each test has its own status badge in this README.
+
+- One test is intentionally left failing 😃 to demonstrate the testing and CI/CD pipeline in action.
+
+You can check the latest results directly on the develop
+ branch.
+
+### 10. Extending the Project
 
 To add new functionality:
 
@@ -172,6 +242,8 @@ To add new functionality:
 - Create a new demo - extend demo::Demo and implement run()
 
 - Add visualization logs - pass the new log file to basic_visualize.py
+
+---
 
 ### References
 
