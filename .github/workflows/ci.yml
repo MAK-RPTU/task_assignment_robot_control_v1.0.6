@@ -7,33 +7,81 @@ on:
     branches: [ develop ]
 
 jobs:
-  build-and-test:
+  build-docker:
+    runs-on: ubuntu-latest
+    outputs:
+      image: meeran_assignment
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t meeran_assignment ./task_assignment
+
+      # Export Docker image name as output for other jobs
+      - name: Set image output
+        run: echo "image=meeran_assignment" >> $GITHUB_OUTPUT
+
+  test_robot_state:
+    needs: build-docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Equivalent to: cd task_assignment_robot_control_v1.0.6/task_assignment && docker build -t meeran_assignment .
-      - name: Build Docker image (Dockerfile in task_assignment/)
-        run: |
-          docker build -t meeran_assignment ./task_assignment
-
-      # Equivalent to your local:
-      # docker run ... -v $(pwd):/assignment
-      # cd task_assignment
-      # cmake -S . -B build && cmake --build build
-      # export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"
-      # cd build && ctest -R robot_test --verbose
-      - name: Run tests inside container
+      - name: Run Robot State Test
         run: |
           docker run --rm \
             -v "${{ github.workspace }}/task_assignment:/assignment" \
             -w /assignment \
-            meeran_assignment \
+            ${{ needs.build-docker.outputs.image }} \
             bash -c '
               cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
               cmake --build build &&
               export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
               cd build &&
-              ctest -R robot_test --verbose
+              ctest -R test_robot_state --verbose
+            '
+
+  test_controllers:
+    needs: build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Controller Test
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/task_assignment:/assignment" \
+            -w /assignment \
+            ${{ needs.build-docker.outputs.image }} \
+            bash -c '
+              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake --build build &&
+              export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
+              cd build &&
+              ctest -R test_controllers --verbose
+            '
+
+  test_demos:
+    needs: build-docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Demo Test
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/task_assignment:/assignment" \
+            -w /assignment \
+            ${{ needs.build-docker.outputs.image }} \
+            bash -c '
+              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake --build build &&
+              export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
+              cd build &&
+              ctest -R test_demos --verbose
             '
