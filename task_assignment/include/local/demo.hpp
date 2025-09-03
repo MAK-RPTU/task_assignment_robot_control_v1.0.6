@@ -47,6 +47,8 @@ private:
     Eigen::VectorXd q_end_;
 };
 
+// Extend with more demos as needed
+
 } // namespace demo
 
 #endif

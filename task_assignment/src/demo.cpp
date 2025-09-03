@@ -71,4 +71,6 @@ void TrajectoryDemo::run(simulation::system& robot,
     std::cout << "Log written to log_trajectory.txt\n";
 }
 
+// Extend with more demos as needed
+
 } // namespace demo

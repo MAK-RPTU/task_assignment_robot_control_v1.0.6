@@ -75,6 +75,8 @@ private:
     double Kd_;
 };
 
+// Extend with more controllers as needed
+
 } // namespace control
 
 #endif
