@@ -30,7 +30,7 @@ int main() {
     std::cout << "tau_pd size: " << tau_pd.size() << std::endl;
     std::cout << "tau_pid size: " << tau_pid.size() << std::endl;
 
-    assert(tau_pd.size() == q_home.size()+1);
+    assert(tau_pd.size() == q_home.size() + 1);
     assert(tau_pid.size() == q_home.size());
     std::cout << "Test 1 passed: Torque vectors have correct size.\n";
 
