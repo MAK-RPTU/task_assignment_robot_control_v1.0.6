@@ -31,9 +31,9 @@ function(add_robot_test TEST_NAME TEST_SRC)
 endfunction()
 
 # --- Define tests ---
-# add_robot_test(test_robot_state test_robot_state.cpp
-#     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
-# )
+add_robot_test(test_robot_state test_robot_state.cpp
+    ${CMAKE_SOURCE_DIR}/src/simulation.cpp
+)
 
 # add_robot_test(test_controllers test_controllers.cpp
 #     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
@@ -44,9 +44,9 @@ endfunction()
 #     ${CMAKE_SOURCE_DIR}/src/demo.cpp
 # )
 
-add_robot_test(robot_test test_robot.cpp
-    ${CMAKE_SOURCE_DIR}/src/simulation.cpp
-    ${CMAKE_SOURCE_DIR}/src/demo.cpp
-)
+# add_robot_test(test_robot test_robot.cpp
+#     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
+#     ${CMAKE_SOURCE_DIR}/src/demo.cpp
+# )
 
 # You can add more tests similarly
