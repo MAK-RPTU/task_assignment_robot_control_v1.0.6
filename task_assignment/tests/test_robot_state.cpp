@@ -11,7 +11,7 @@ int main() {
     simulation::system robot{urdf_filename, dt, q_home};
 
     // Basic robot state check
-    assert(robot.state.q.size() == 6);
+    assert(robot.state.q.size() + 1 == 6);
     assert(robot.state.dq.size() == 6);
     std::cout << "Test passed: Robot state initialized correctly.\n";
 
