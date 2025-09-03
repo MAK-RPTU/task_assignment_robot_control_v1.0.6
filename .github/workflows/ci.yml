@@ -58,6 +58,8 @@ jobs:
 
       - name: Run Robot State Tests
         run: |
+          chmod +x task_assignment/build/tests/test_robot_state
+          export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_robot_state --output-on-failure --verbose
 
@@ -76,6 +78,8 @@ jobs:
 
       - name: Run Controller Tests
         run: |
+          chmod +x task_assignment/build/tests/test_controllers
+          export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_controllers --output-on-failure --verbose
 
@@ -94,5 +98,7 @@ jobs:
 
       - name: Run Demo Tests
         run: |
+          chmod +x task_assignment/build/tests/test_assignment
+          export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
           cd task_assignment/build
           ctest -R test_demos --output-on-failure --verbose
