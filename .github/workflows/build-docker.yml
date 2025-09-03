@@ -1,11 +1,14 @@
-name: Test Docker build
+name: C++ Tests in Docker
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - develop
+      - main
   pull_request:
-    branches: [ develop ]
-
+    branches:
+      - develop
+      - main 
 jobs:
   # Step 1: Build the Docker image once
   build-docker:
@@ -15,7 +18,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t meeran_assignment ./task_assignment
       # - name: Save Docker image as artifact
-      #   run: docker save meeran_assignment:latest | gzip > meeran_assignment.tar.gz
+        # run: docker save meeran_assignment:latest | gzip > meeran_assignment.tar.gz
       # - uses: actions/upload-artifact@v4
       #   with:
       #     name: meeran_assignment
