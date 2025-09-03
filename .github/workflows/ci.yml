@@ -25,4 +25,4 @@ jobs:
           cmake -S . -B build
           cmake --build build
           cd build
-          ctest -R test_robot_state --verbose
+          ctest -R test_robot --verbose
