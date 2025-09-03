@@ -3,13 +3,9 @@ name: Test Robot State
 on:
   workflow_dispatch:
   push:
-    branches:
-      - develop
-      - main
+    branches: [ develop ]
   pull_request:
-    branches:
-      - develop
-      - main
+    branches: [ develop ]
 
 jobs:
   test_robot_state:
