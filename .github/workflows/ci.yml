@@ -1,4 +1,4 @@
-name: C++ Build & Test (Docker)
+name: C++ Tests in Docker
 
 on:
   push:
@@ -7,79 +7,89 @@ on:
     branches: [ develop ]
 
 jobs:
+  # Step 1: Build the Docker image once
   build-docker:
     runs-on: ubuntu-latest
-    outputs:
-      image: meeran_assignment
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Build Docker image
-        run: |
-          docker build -t meeran_assignment ./task_assignment
+        run: docker build -t meeran_assignment ./task_assignment
+      - name: Save Docker image as artifact
+        run: docker save meeran_assignment:latest | gzip > meeran_assignment.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: meeran_assignment
+          path: meeran_assignment.tar.gz
 
-      # Export Docker image name as output for other jobs
-      - name: Set image output
-        run: echo "image=meeran_assignment" >> $GITHUB_OUTPUT
-
+  # Step 2: Run Robot State test
   test_robot_state:
     needs: build-docker
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run Robot State Test
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: meeran_assignment
+      - name: Load Docker image
+        run: docker load < meeran_assignment.tar.gz
+      - name: Run Robot State test
         run: |
           docker run --rm \
             -v "${{ github.workspace }}/task_assignment:/assignment" \
             -w /assignment \
-            ${{ needs.build-docker.outputs.image }} \
+            meeran_assignment \
             bash -c '
-              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake -S . -B build &&
               cmake --build build &&
               export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
               cd build &&
               ctest -R test_robot_state --verbose
             '
 
+  # Step 3: Run Controllers test
   test_controllers:
     needs: build-docker
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run Controller Test
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: meeran_assignment
+      - name: Load Docker image
+        run: docker load < meeran_assignment.tar.gz
+      - name: Run Controllers test
         run: |
           docker run --rm \
             -v "${{ github.workspace }}/task_assignment:/assignment" \
             -w /assignment \
-            ${{ needs.build-docker.outputs.image }} \
+            meeran_assignment \
             bash -c '
-              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake -S . -B build &&
               cmake --build build &&
               export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
               cd build &&
               ctest -R test_controllers --verbose
             '
 
+  # Step 4: Run Demo test
   test_demos:
     needs: build-docker
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Run Demo Test
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: meeran_assignment
+      - name: Load Docker image
+        run: docker load < meeran_assignment.tar.gz
+      - name: Run Demos test
         run: |
           docker run --rm \
             -v "${{ github.workspace }}/task_assignment:/assignment" \
             -w /assignment \
-            ${{ needs.build-docker.outputs.image }} \
+            meeran_assignment \
             bash -c '
-              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake -S . -B build &&
               cmake --build build &&
               export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
               cd build &&
