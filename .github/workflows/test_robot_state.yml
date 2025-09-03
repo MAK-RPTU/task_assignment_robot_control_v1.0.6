@@ -1,0 +1,35 @@
+name: Test Robot State
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test_robot_state:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: meeran_assignment
+
+      - name: Load Docker image
+        run: docker load < meeran_assignment.tar.gz
+
+      - name: Run Robot State test
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/task_assignment:/assignment" \
+            -w /assignment \
+            meeran_assignment \
+            bash -c '
+              cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug &&
+              cmake --build build &&
+              export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
+              cd build &&
+              ctest -R test_robot_state --verbose
+            '

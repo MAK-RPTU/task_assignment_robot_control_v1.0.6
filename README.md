@@ -195,6 +195,9 @@ All tests are located in the `tests/` directory:
 
   -  `test_robot.cpp` - Combined sample test covering multiple components.
 
+Note:  
+These are simple assertion-based tests, not full testing frameworks like GoogleTest or PyTest. The goal is to keep them lightweight and to demonstrate.
+
 #### Running Tests
 
 ##### Build the project in Debug mode (required for test symbols & assertions). Before build don't forget to be in `task_assignment/` directory:
@@ -208,7 +211,9 @@ cmake --build build
 ```
 ##### Go to the build directory:
 
+```bash
 cd build/
+```
 
 ##### Run a specific test with CTest:
 
@@ -224,14 +229,13 @@ ctest -R test_robot_state --verbose
 
 ##### Automated Tests (CI/CD)
 
-- Use GitHub Actions to run tests automatically on every push to the develop branch.
+- Use GitHub Actions to run tests automatically on every push to the `develop` branch.
 
 - Each test has its own status badge in this README.
 
 - One test is intentionally left failing 😃 to demonstrate the testing and CI/CD pipeline in action.
 
-You can check the latest results directly on the develop
- branch.
+You can check the latest results directly on the `develop` branch.
 
 ### 10. Extending the Project
 
