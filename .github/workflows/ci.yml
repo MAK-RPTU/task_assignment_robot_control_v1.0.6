@@ -51,7 +51,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
-            build-essential cmake libeigen3-dev libtinyxml-dev
+            build-essential cmake libeigen3-dev libtinyxml-dev libconsole-bridge-dev
           sudo ldconfig
 
       - name: Download build artifacts
@@ -80,7 +80,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
-            build-essential cmake libeigen3-dev libtinyxml-dev
+            build-essential cmake libeigen3-dev libtinyxml-dev libconsole-bridge-dev
           sudo ldconfig
 
       - name: Download build artifacts
@@ -109,9 +109,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y \
-            build-essential cmake libeigen3-dev libtinyxml-dev
+            build-essential cmake libeigen3-dev libtinyxml-dev libconsole-bridge-dev
           sudo ldconfig
-          
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
