@@ -1,4 +1,4 @@
-name: C++ Build & Test (Robot State Only)
+name: C++ Build & Test (Docker)
 
 on:
   push:
@@ -7,23 +7,33 @@ on:
     branches: [ develop ]
 
 jobs:
-  build-test:
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
+      # Equivalent to: cd task_assignment_robot_control_v1.0.6/task_assignment && docker build -t meeran_assignment .
+      - name: Build Docker image (Dockerfile in task_assignment/)
         run: |
-          sudo apt update
-          sudo apt install -y build-essential cmake python3 python3-pip libeigen3-dev
+          docker build -t meeran_assignment ./task_assignment
 
-      - name: Configure, Build, and Test (Robot State Only)
+      # Equivalent to your local:
+      # docker run ... -v $(pwd):/assignment
+      # cd task_assignment
+      # cmake -S . -B build && cmake --build build
+      # export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"
+      # cd build && ctest -R robot_test --verbose
+      - name: Run tests inside container
         run: |
-          cd task_assignment
-          cmake -S . -B build
-          cmake --build build
-          export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH"
-          cd build
-          ctest -R robot_test --verbose
+          docker run --rm \
+            -v "${{ github.workspace }}/task_assignment:/assignment" \
+            -w /assignment \
+            meeran_assignment \
+            bash -c '
+              cmake -S . -B build &&
+              cmake --build build &&
+              export LD_LIBRARY_PATH="$(pwd)/lib:$LD_LIBRARY_PATH" &&
+              cd build &&
+              ctest -R robot_test --verbose
+            '
