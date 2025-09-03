@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Robot State Tests
         run: |
-          cd build
+          cd task_assignment/build
           ctest -R test_robot_state --verbose
 
   test_controllers:
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Controller Tests
         run: |
-          cd build
+          cd task_assignment/build
           ctest -R test_controllers --verbose
 
   test_demos:
@@ -51,5 +51,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Demo Tests
         run: |
-          cd build
+          cd task_assignment/build
           ctest -R test_demos --verbose
