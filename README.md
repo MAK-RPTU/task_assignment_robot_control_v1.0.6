@@ -1,7 +1,15 @@
 # task_assignment_robot_control_v1.0.6
 
+
+| Test            | Status |
+|-----------------|--------|
+| Robot State     | ![Robot State](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_robot_state) |
+| Controllers     | ![Controllers](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_controllers) |
+| Demos           | ![Demos](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_demos) |
+
+
 **Build Test**  
-![Build Docker](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=build-docker)
+<!-- ![Build Docker](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=build-docker)
 
 **Robot State Test**  
 ![Robot State Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_robot_state)
@@ -10,7 +18,7 @@
 ![Controllers Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_controllers)
 
 **Demos Test**  
-![Demos Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_demos)
+![Demos Test](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_demos) -->
 
 
 This project implements **robot control for a UR5 manipulator** in a Bullet Physics simulation.  
