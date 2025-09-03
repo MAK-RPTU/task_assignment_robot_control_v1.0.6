@@ -42,7 +42,7 @@ add_robot_test(test_controllers test_controllers.cpp
 add_robot_test(test_demos test_demos.cpp
     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
     ${CMAKE_SOURCE_DIR}/src/demo.cpp
-# )
+)
 
 add_robot_test(robot_test test_robot.cpp
     ${CMAKE_SOURCE_DIR}/src/simulation.cpp
