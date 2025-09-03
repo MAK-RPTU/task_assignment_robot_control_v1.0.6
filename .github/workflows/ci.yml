@@ -15,14 +15,15 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y software-properties-common\
+          sudo apt install -y \
+            software-properties-common \
             build-essential \
             cmake \
             git \
             python3 \
             python3-pip \
             libgl1 \
-            libsm6 \ 
+            libsm6 \
             libxext6 \
             libeigen3-dev \
             libtinyxml-dev
