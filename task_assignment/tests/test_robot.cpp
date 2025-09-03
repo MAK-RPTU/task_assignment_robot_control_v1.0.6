@@ -26,6 +26,10 @@ int main() {
     Eigen::VectorXd tau_pd = pd_controller.compute_torque(robot, dt);
     Eigen::VectorXd tau_pid = pid_controller.compute_torque(robot, dt);
 
+    std::cout << "q_home size: " << q_home.size() << std::endl;
+    std::cout << "tau_pd size: " << tau_pd.size() << std::endl;
+    std::cout << "tau_pid size: " << tau_pid.size() << std::endl;
+
     assert(tau_pd.size() == q_home.size()+1);
     assert(tau_pid.size() == q_home.size());
     std::cout << "Test 1 passed: Torque vectors have correct size.\n";
