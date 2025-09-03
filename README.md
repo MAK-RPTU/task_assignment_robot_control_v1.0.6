@@ -3,10 +3,10 @@
 
 | Test            | Status |
 |-----------------|--------|
-| Build     | ![Robot State](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=build-docker) |
-| Robot State     | ![Robot State](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_robot_state) |
-| Controllers     | ![Controllers](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_controllers) |
-| Demos           | ![Demos](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/ci.yml/badge.svg?job=test_demos) |
+| Build     | ![Robot State](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/build-docker.yml/badge.svg?job=build-docker) |
+| Robot State     | ![Robot State](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/test_robot_state.yml/badge.svg?job=test_robot_state) |
+| Controllers     | ![Controllers](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/test_controllers.yml/badge.svg?job=test_controllers) |
+| Demos           | ![Demos](https://github.com/MAK-RPTU/task_assignment_robot_control_v1.0.6/actions/workflows/test_demos.yml/badge.svg?job=test_demos) |
 
 
 **Build Test**  
