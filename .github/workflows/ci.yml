@@ -38,22 +38,30 @@ jobs:
           path: task_assignment/build
 
   test_robot_state:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build
-          path: task_assignment/build
+    - name: Install runtime dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y libtinyxml-dev libeigen3-dev
+        sudo ldconfig
 
-      - name: Fix test permissions
-        run: |
-          chmod +x task_assignment/build/tests/*
-          
-      - name: Run Robot State Tests
-        run: |
-          cd task_assignment/build
-          ctest -R "^test_robot_state$" --verbose
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build
+        path: task_assignment/build
+
+    - name: Fix test permissions
+      run: |
+        chmod +x task_assignment/build/tests/*
+
+    - name: Run Robot State Tests
+      run: |
+        export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+        cd task_assignment/build
+        ctest -R "^test_robot_state$" --verbose
+
